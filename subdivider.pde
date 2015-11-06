@@ -31,7 +31,7 @@ void draw () {
 }
 
 
-final int MAX_DEPTH = 3;
+final int MAX_DEPTH = 5;
 
 void subdivide (int x, int y, int w, int h, int depth) {
   println ("sub x: " + x + " y: " + y + " w: " + w + " h: " + h + " d: " + depth);
@@ -41,13 +41,16 @@ void subdivide (int x, int y, int w, int h, int depth) {
       return;
     }
   
+  boolean padding = depth < 3;
   boolean split_horizontal = int (random (0, 2)) == 0;
   int num_splits = int (random (1, 4));
+  
   for (int i = 0  ;  i < num_splits  ;  i++)
     { println ("split horizontal? " + split_horizontal);
       int tw =  split_horizontal  ?  0  :  (w / num_splits + (i == (num_splits - 1)  ?  w % num_splits  :  0));
       int th =  split_horizontal  ?  (h / num_splits + (i == (num_splits - 1)  ?  h % num_splits  :  0))  :  0;
-      subdivide (x, y, split_horizontal  ?  w  :  tw, split_horizontal  ?  th  :  h, depth + 1);
+      subdivide (x, y, split_horizontal  ?  w  :  tw - (padding  &&  i != (num_splits - 1) ?  1  :  0),
+                       split_horizontal  ?  th - (padding  &&  i != (num_splits - 1) ?  1  :  0) :  h, depth + 1);
       x += tw;
       y += th;
     }
