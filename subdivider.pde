@@ -18,7 +18,7 @@ final float GRID_UNIT_SIZE = (float) SIZE / MAX_COLUMNS;
 ArrayList <Cell> cells;
 
 enum Component {
-  TINY_BUTTON (1, 1, 1), LEVER (1, 2, 1), RECT_BUTTON (2, 2, 3), KNOB (5, 3, 1);
+  TINY_BUTTON (1, 1, 1), LEVER (1, 2, 1), RECT_BUTTON (2, 2, 3), KNOB (5, 4, 3);
   
   public final int w;
   public final int h;
@@ -93,11 +93,11 @@ void subdivide (int x, int y, int w, int h, int depth, boolean split_horizontal)
 
 Component randomComponent (int w, int h) {
   int r = int (random (0, 4));
-  if (/*r == 4  &&*/  w % 5 == 0  &&  h % 3 == 0)
+  if (/*r == 4  &&*/  w % Component.KNOB.w == 0  &&  h % Component.KNOB.h == 0)
     return Component.KNOB;
-  else if (w % 2 == 0  &&  h % 2 == 0)
+  else if (w % Component.RECT_BUTTON.w == 0  &&  h % Component.RECT_BUTTON.h == 0)
     return Component.RECT_BUTTON;
-  else if (h % 2 == 0)
+  else if (w % Component.LEVER.w == 0  &&  h % Component.LEVER.h == 0)
     return Component.LEVER;
   
   // default
