@@ -3,12 +3,14 @@
 final int MAX_COLUMNS = 64;
 final int MAX_BLOCK_SIZE = 6; // err, MAX_BLOCK_SIZE_PLUS_ONE, that is
 final int MAX_ROWS = 64;
-PImage tiny_button_img;
-PImage rect_button_img;
-PImage lever_img;
-PImage knob_img;
+PImage[] tiny_button_img;
+PImage[] rect_button_img;
+PImage[] lever_img;
+PImage[] knob_img;
 
 
+
+int seed = 0;
 
 final int SIZE = 750;
 final float GRID_UNIT_SIZE = (float) SIZE / MAX_COLUMNS;
@@ -16,14 +18,16 @@ final float GRID_UNIT_SIZE = (float) SIZE / MAX_COLUMNS;
 ArrayList <Cell> cells;
 
 enum Component {
-  TINY_BUTTON (1, 1), LEVER (1, 2), RECT_BUTTON (2, 2), KNOB (5, 3);
+  TINY_BUTTON (1, 1, 1), LEVER (1, 2, 1), RECT_BUTTON (2, 2, 3), KNOB (5, 3, 1);
   
   public final int w;
   public final int h;
+  public final int num_images;
   
-  Component (int w, int h) {
+  Component (int w, int h, int num_images) {
     this.w = w;
     this.h = h;
+    this.num_images = num_images;
   }
 }
 
@@ -32,17 +36,30 @@ void setup () {
   pixelDensity(displayDensity());
   noStroke ();
 
-  tiny_button_img = loadImage ("tiny-button.jpg");
-  rect_button_img = loadImage ("rect-button.jpg");
-  lever_img = loadImage ("lever.jpg");
-  knob_img = loadImage ("knob.jpg");
-
+  tiny_button_img = new PImage[Component.TINY_BUTTON.num_images];
+  for (int i = 0  ;  i < tiny_button_img.length  ;  i++) {
+    tiny_button_img[i] = loadImage ("tiny-button-" + (i + 1) + ".jpg");
+  }
+  rect_button_img = new PImage[Component.RECT_BUTTON.num_images];
+  for (int i = 0  ;  i < rect_button_img.length  ;  i++) {
+    rect_button_img[i] = loadImage ("rect-button-" + (i + 1) + ".jpg");
+  }
+  lever_img = new PImage[Component.LEVER.num_images];
+  for (int i = 0  ;  i < lever_img.length  ;  i++) {
+    lever_img[i] = loadImage ("lever-" + (i + 1) + ".jpg");
+  }
+  knob_img = new PImage[Component.KNOB.num_images];
+  for (int i = 0  ;  i < knob_img.length  ;  i++) {
+    knob_img[i] = loadImage ("knob-" + (i + 1) + ".jpg");
+  }
+  
   cells = new ArrayList <Cell> ();
   boolean split_horizontal = int (random (0, 2)) == 0;
   subdivide (0, 0, MAX_ROWS, MAX_COLUMNS, 0, split_horizontal);
 }
 
 void draw () {
+  randomSeed (seed);
   background (141, 145, 146);
   for (Cell c : cells)
     c.draw ();
@@ -89,6 +106,7 @@ Component randomComponent (int w, int h) {
 
 void mousePressed () {
   cells.clear();
+  seed++;
   boolean split_horizontal = int (random (0, 2)) == 0;
   subdivide (0, 0, MAX_ROWS, MAX_COLUMNS, 0, split_horizontal);
 }
