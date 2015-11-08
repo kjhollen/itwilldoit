@@ -17,27 +17,28 @@ public class Cell {
   }
   
   void draw () {
-    /*PImage img;*/
+    PImage img = tiny_button_img;
     //println ("drawing cell");
-    color c = color (0);
-    switch (type) {
-      case TINY_BUTTON:
-        //img = tiny_button_img;
-        c = color (0, 50);
-        break;
-      case RECT_BUTTON:
-        //img = rect_button_img;
-        c = color (255, 0, 0, 50);
-        break;
-      case LEVER:
-        //img = level_img;
-        c = color (0, 255, 0, 50);
-        break;
-      case KNOB:
-        //img = knob_img;
-        c = color (0, 0, 255, 50);
+    color col = color (0);
+    if (type == Component.TINY_BUTTON) {
+        img = tiny_button_img;
+        col = color (0, 50);
+    } else if (type == Component.RECT_BUTTON) {
+        img = rect_button_img;
+        col = color (255, 0, 0, 50);
+    } else if (type == Component.LEVER) {
+        img = lever_img;
+        col = color (0, 255, 0, 50);
+    } else if (type == Component.KNOB) {
+        img = knob_img;
+        col = color (0, 0, 255, 50);
     }
-    fill (c);
+    fill (col);
+    for (int r = 0  ;  r < this.h  ;  r += type.h) {
+      for (int c = 0  ;  c < this.w  ;  c += type.w) {
+        image (img, (x + c) * GRID_UNIT_SIZE, (y + r) * GRID_UNIT_SIZE, type.w * GRID_UNIT_SIZE, type.h * GRID_UNIT_SIZE);
+      }
+    }
     rect (x * GRID_UNIT_SIZE, y * GRID_UNIT_SIZE, w * GRID_UNIT_SIZE, h * GRID_UNIT_SIZE); //<>//
   }
 }
