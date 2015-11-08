@@ -39,6 +39,6 @@ public class Cell {
         image (img, (x + c) * GRID_UNIT_SIZE, (y + r) * GRID_UNIT_SIZE, type.w * GRID_UNIT_SIZE, type.h * GRID_UNIT_SIZE);
       }
     }
-    rect (x * GRID_UNIT_SIZE, y * GRID_UNIT_SIZE, w * GRID_UNIT_SIZE, h * GRID_UNIT_SIZE); //<>//
+    //rect (x * GRID_UNIT_SIZE, y * GRID_UNIT_SIZE, w * GRID_UNIT_SIZE, h * GRID_UNIT_SIZE); //<>//
   }
 }
