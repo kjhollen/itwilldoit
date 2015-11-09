@@ -9,16 +9,15 @@ PImage[] lever_img;
 PImage[] knob_img;
 
 
-
 int seed = 0;
 
 final int SIZE = 750;
-final float GRID_UNIT_SIZE = (float) SIZE / MAX_COLUMNS;
+final float GRID_UNIT_SIZE = 11;
 
 ArrayList <Cell> cells;
 
 enum Component {
-  TINY_BUTTON (1, 1, 1), LEVER (1, 2, 1), RECT_BUTTON (2, 2, 3), KNOB (5, 4, 3);
+  TINY_BUTTON (1, 1, 2), LEVER (1, 2, 1), RECT_BUTTON (2, 2, 3), KNOB (5, 4, 3);
   
   public final int w;
   public final int h;
@@ -60,7 +59,7 @@ void setup () {
 
 void draw () {
   randomSeed (seed);
-  background (141, 145, 146);
+  background (153, 149, 147);
   for (Cell c : cells)
     c.draw ();
 }
