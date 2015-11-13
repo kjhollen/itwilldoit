@@ -8,9 +8,6 @@ PImage[] rect_button_img;
 PImage[] lever_img;
 PImage[] knob_img;
 
-
-int seed = 0;
-
 final int SIZE = 750;
 final float GRID_UNIT_SIZE = 11;
 
@@ -58,10 +55,11 @@ void setup () {
 }
 
 void draw () {
-  randomSeed (seed);
   background (153, 149, 147);
   for (Cell c : cells)
     c.draw ();
+  save ("output.jpg");
+  exit ();
 }
 
 
@@ -105,7 +103,6 @@ Component randomComponent (int w, int h) {
 
 void mousePressed () {
   cells.clear();
-  seed++;
   boolean split_horizontal = int (random (0, 2)) == 0;
   subdivide (0, 0, MAX_ROWS, MAX_COLUMNS, 0, split_horizontal);
 }
