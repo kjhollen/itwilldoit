@@ -93,7 +93,7 @@ final int MAX_DEPTH = 6;
 void subdivide (int x, int y, int w, int h, int depth, boolean split_horizontal) {
   //println ("sub x: " + x + " y: " + y + " w: " + w + " h: " + h + " d: " + depth);
   if (depth == MAX_DEPTH)
-    { cells.add (new Cell (x, y, w, h, randomComponent (w, h)));
+    { cells.add (new Cell (x, y, w, h, notSoRandomComponent (w, h)));
       return;
     }
   
@@ -115,7 +115,7 @@ void subdivide (int x, int y, int w, int h, int depth, boolean split_horizontal)
     }
 }
 
-Component randomComponent (int w, int h) {
+Component notSoRandomComponent (int w, int h) {
   if (w % Component.KNOB.w == 0  &&  h % Component.KNOB.h == 0)
     return Component.KNOB;
   else if (w % Component.RECT_BUTTON.w == 0  &&  h % Component.RECT_BUTTON.h == 0)
