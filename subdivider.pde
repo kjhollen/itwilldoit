@@ -2,16 +2,16 @@
 /* some simple business machines...
  */
 
-final int MAX_COLUMNS = 64;
+final int MAX_COLUMNS = 68;
 final int MAX_BLOCK_SIZE = 6; // err, MAX_BLOCK_SIZE_PLUS_ONE, that is
-final int MAX_ROWS = 64;
+final int MAX_ROWS = 68;
 PImage[] tiny_button_img;
 PImage[] rect_button_img;
 PImage[] lever_img;
 PImage[] knob_img;
 
-final int SIZE = 750;
-final float GRID_UNIT_SIZE = 11;
+final int SIZE = 1600;
+final float GRID_UNIT_SIZE = 22;
 
 ArrayList <Cell> cells;
 
@@ -36,8 +36,7 @@ enum Component {
 }
 
 void setup () {
-  size (750, 750);
-  pixelDensity(displayDensity());
+  size (1600, 1600);
   noStroke ();
 
   // load in available images for each component
