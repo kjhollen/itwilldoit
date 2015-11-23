@@ -2,9 +2,9 @@
 /* some simple business machines...
  */
 
-final int MAX_COLUMNS = 68;
+final int MAX_COLUMNS = 52;
 final int MAX_BLOCK_SIZE = 6; // err, MAX_BLOCK_SIZE_PLUS_ONE, that is
-final int MAX_ROWS = 68;
+final int MAX_ROWS = 28;
 PImage[] tiny_button_img;
 PImage[] rect_button_img;
 PImage[] lever_img;
@@ -15,12 +15,12 @@ String[] button_names;
 PFont font;
 PFont bold_font;
 
-final int SIZE = 2500;
+final int SIZE = 1920;
 final float GRID_UNIT_SIZE = 35;
 
 ArrayList <Cell> cells;
 
-final boolean DEBUG = false;
+final boolean DEBUG = true;
 
 enum Component {
   TINY_BUTTON (1, 1, 1), LEVER (1, 2, 3), RECT_BUTTON (2, 2, 3), KNOB (5, 4, 2);
@@ -41,7 +41,7 @@ enum Component {
 }
 
 void setup () {
-  size (2500, 2500);
+  size (1920, 1080);
   noStroke ();
 
   font = loadFont ("Helvetica-7.vlw");
