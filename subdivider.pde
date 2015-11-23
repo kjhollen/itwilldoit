@@ -114,7 +114,7 @@ void subdivide (int x, int y, int w, int h, int depth, boolean split_horizontal)
   
   // leave some space around the first few levels so that
   // subdivisions are visible; read as separate "panels" interface
-  boolean padding = depth < 4;
+  boolean padding = depth < 3;
   int num_splits = int (random (2, 4));
   
   for (int i = 0  ;  i < num_splits  ;  i++)
@@ -150,5 +150,5 @@ Component notSoRandomComponent (int w, int h) {
 void mousePressed () {
   cells.clear();
   boolean split_horizontal = int (random (0, 2)) == 0;
-  subdivide (0, 0, MAX_ROWS, MAX_COLUMNS, 0, split_horizontal);
+  subdivide (0, 0, MAX_COLUMNS, MAX_ROWS, 0, split_horizontal);
 }
