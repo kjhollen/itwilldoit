@@ -9,16 +9,21 @@ PImage[] tiny_button_img;
 PImage[] rect_button_img;
 PImage[] lever_img;
 PImage[] knob_img;
+PImage background_img;
 
-final int SIZE = 1600;
-final float GRID_UNIT_SIZE = 22;
+String[] button_names;
+PFont font;
+PFont bold_font;
+
+final int SIZE = 2500;
+final float GRID_UNIT_SIZE = 35;
 
 ArrayList <Cell> cells;
 
 final boolean DEBUG = false;
 
 enum Component {
-  TINY_BUTTON (1, 1, 2), LEVER (1, 2, 1), RECT_BUTTON (2, 2, 3), KNOB (5, 4, 3);
+  TINY_BUTTON (1, 1, 1), LEVER (1, 2, 3), RECT_BUTTON (2, 2, 3), KNOB (5, 4, 2);
   
   // grid width and height that the image is supposed to take
   // up at its native resolution
@@ -36,36 +41,47 @@ enum Component {
 }
 
 void setup () {
-  size (1600, 1600);
+  size (2500, 2500);
   noStroke ();
+
+  font = loadFont ("Helvetica-7.vlw");
+  bold_font = loadFont ("Helvetica-Bold-7.vlw");
+  button_names = loadStrings ("button-names.txt");
 
   // load in available images for each component
   tiny_button_img = new PImage[Component.TINY_BUTTON.num_images];
   for (int i = 0  ;  i < tiny_button_img.length  ;  i++) {
-    tiny_button_img[i] = loadImage ("tiny-button-" + (i + 1) + ".jpg");
+    tiny_button_img[i] = loadImage ("tiny-button-" + (i + 1) + ".png");
   }
   rect_button_img = new PImage[Component.RECT_BUTTON.num_images];
   for (int i = 0  ;  i < rect_button_img.length  ;  i++) {
-    rect_button_img[i] = loadImage ("rect-button-" + (i + 1) + ".jpg");
+    rect_button_img[i] = loadImage ("rect-button-" + (i + 1) + ".png");
   }
   lever_img = new PImage[Component.LEVER.num_images];
   for (int i = 0  ;  i < lever_img.length  ;  i++) {
-    lever_img[i] = loadImage ("lever-" + (i + 1) + ".jpg");
+    lever_img[i] = loadImage ("lever-" + (i + 1) + ".png");
   }
   knob_img = new PImage[Component.KNOB.num_images];
   for (int i = 0  ;  i < knob_img.length  ;  i++) {
-    knob_img[i] = loadImage ("knob-" + (i + 1) + ".jpg");
+    knob_img[i] = loadImage ("knob-" + (i + 1) + ".png");
   }
+  
+  background_img = loadImage ("noise.jpg");
   
   cells = new ArrayList <Cell> ();
   
   // yay. it's doing it:
   boolean split_horizontal = int (random (0, 2)) == 0;
-  subdivide (0, 0, MAX_ROWS, MAX_COLUMNS, 0, split_horizontal);
+  subdivide (0, 0, MAX_COLUMNS, MAX_ROWS, 0, split_horizontal);
 }
 
 void draw () {
-  background (153, 149, 147);
+      
+  if (DEBUG)
+    randomSeed (1);
+  
+  background (#eedea9);
+  image (background_img, 0, 0);
   for (Cell c : cells)
     c.draw ();
   
