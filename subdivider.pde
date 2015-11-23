@@ -15,6 +15,8 @@ String[] button_names;
 PFont font;
 PFont bold_font;
 
+int last_change = 0;
+
 final int SIZE = 1920;
 final float GRID_UNIT_SIZE = 35;
 
@@ -84,6 +86,13 @@ void draw () {
   image (background_img, 0, 0);
   for (Cell c : cells)
     c.draw ();
+    
+  if (millis () - last_change > 30 * 1000) {
+    cells.clear();
+    boolean split_horizontal = int (random (0, 2)) == 0;
+    subdivide (0, 0, MAX_COLUMNS, MAX_ROWS, 0, split_horizontal);
+    last_change = millis ();
+  }
   
   if (! DEBUG)
     { save ("output.jpg");
