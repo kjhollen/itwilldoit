@@ -45,6 +45,7 @@ enum Component {
 void setup () {
   size (1920, 1080);
   noStroke ();
+  noCursor ();
 
   font = loadFont ("Helvetica-7.vlw");
   bold_font = loadFont ("Helvetica-Bold-7.vlw");
