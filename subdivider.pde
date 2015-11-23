@@ -92,7 +92,7 @@ void draw () {
 }
 
 
-final int MAX_DEPTH = 6;
+final int MAX_DEPTH = 5;
 
 /*
  * recursively subdivides the rectangle until MAX_DEPTH is reached
